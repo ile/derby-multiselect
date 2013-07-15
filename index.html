@@ -1,0 +1,17 @@
+<select: nonvoid>
+  <!-- a :self path alias is automatically created per component -->
+  <div class="btn-group dropdown {#if :self.open}open{/}">
+    <!-- x-as can be used to pass a reference to an element to the script -->
+    <a x-as="toggle" x-bind="click: toggle" class="btn dropdown-toggle">
+      <span>{:self.label} {selected_count(:self.value)}</span> <span class="caret"></span>
+    </a>
+    <menu x-as="menu" class="dropdown-menu">
+      {#if @all}
+        <li class="all"><input x-bind="change:_click_all" type="checkbox" id="id_all"> <label for="id_all">{{@all}}</label></li>
+      {/}
+      {@content}
+    </menu>
+  </div>
+
+<option: nonvoid>
+  <li>{#with :self}<input x-bind="change:_click" type="checkbox" id="id_{{create_id(@value)}}"> <label for="id_{{create_id(@value)}}">{@text}</label>{/}</li>
